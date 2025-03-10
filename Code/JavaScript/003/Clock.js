@@ -72,3 +72,167 @@ function Update(){
     display.textContent = `${TimerHours}:${TimerMinutes}:${TimerSeconds}:${TimerMiliseconds}`;
     
 }
+
+
+// HTML
+
+/* <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <h1>GLOCK</h1>
+
+    <div id="Clock-Container">
+
+        <div id="Clock"> 00:00:00 </div>
+
+    </div>
+
+    <div id="Container">
+
+        <div id="Display">
+
+            00:00:00:00
+
+        </div>
+
+        <div id="Controls">
+
+            <button id="StartBtn" onclick="Start()">Start</button>
+            <button id="StopBtn" onclick="Stop()">Stop</button>
+            <button id="ResetBtn" onclick="Reset()">Reset</button>
+            
+        </div>
+
+    </div>
+
+
+    <script src="./003/Clock.js"></script>
+</body>
+</html> */
+
+// CSS
+
+/* body{
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+
+    background-color: rgb(14, 31, 53);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+h1{
+
+    color: aliceblue;
+    font-size: 4rem;
+
+}
+
+#Clock-Container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 10;
+    border: 2px white;
+
+    margin-bottom: 3rem;
+
+}
+
+#Clock{
+
+    font-size: 6.5rem;
+    text-align: center;
+
+    color: aliceblue;
+
+    
+    
+}
+
+#Display{
+
+    font-size: 4rem;
+    color: aliceblue;
+    
+    margin-bottom: 15px;
+
+}
+
+#Container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    background-color: rgb(30, 83, 104);
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 2.5em;
+
+}
+
+#Controls button{
+
+    font-size: 1rem;
+
+    padding: 5px 10px;
+    margin: 5px;
+    min-width: 110px;
+    border-radius: 5px;
+    
+    cursor: pointer;
+    color: white;
+
+    border: none;
+
+    transition: background-color 0.5s ease;
+
+}
+
+#StartBtn{
+
+    background-color: rgb(62, 179, 140);
+}
+
+#StartBtn:hover{
+
+    background-color: rgb(55, 161, 126);
+}
+
+#StopBtn{
+
+    background-color: rgb(212, 53, 53);
+}
+
+#StopBtn:hover{
+
+    background-color: rgb(163, 39, 39);
+}
+
+#ResetBtn{
+
+    background-color: rgb(62, 89, 179);
+}
+
+#ResetBtn:hover{
+
+    background-color: rgb(48, 69, 139);
+}
+ */

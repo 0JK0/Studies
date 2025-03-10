@@ -1,99 +1,109 @@
+const IncreaseBtn = document.getElementById("IncreaseBtn");
+const ResetBtn = document.getElementById("ResetBtn");
+const DecreaseBtn = document.getElementById("DecreaseBtn");
+const CounterTxT = document.getElementById("CounterTxt");
 
-const decreaseBtn = document.getElementById("DecreseBtn");
-const resetBtn = document.getElementById("ResetBtn");
-const increaseBtn = document.getElementById("IncreaseBtn");
+let CounterInt = parseInt(CounterTxT.innerText);
 
-const countLabel = document.getElementById("CountLabel")
-let count = 0;
+function IncreaseCounter(){
 
-//When are asigning a specific and unique? function to the click event on this button
-increaseBtn.onclick = function (){
-
-    count++;
-    countLabel.textContent = count;
-}
-
-resetBtn.onclick = function (){
-
-    count = 0;
-    countLabel.textContent = count;
+   
+   CounterInt += 1;
+   CounterTxT.innerText = CounterInt;
 
 }
 
-decreaseBtn.onclick = function (){
+function ResetCounter(){
 
-    count--;
-    countLabel.textContent = count;
-
-} 
-
-REQUIRED HTML
-
-// <!DOCTYPE html>
-// <html lang="en">
-
-// <head>
-//     <meta charset="UTF-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//     <title>Document</title>
-//     <link rel="stylesheet" href="./style.css">
-// </head>
-
-// <body>
-//     <label id="CountLabel">0</label>
-
-//     <div id="BtnContainer">
-
-//         <button id="DecreseBtn" class="Buttons" >Decrease</button>
-//         <button id="ResetBtn" class="Buttons" >Reset</button>
-//         <button id ="IncreaseBtn" class="Buttons" >Increase</button>
-
-//     </div>
-
-//     <script src="./003/Temperature.js"></script>
-// </body>
-// </html>
-
-
-REQUIRED CSS 
-
-// body{
-
-//     background-color: rgb(3, 1, 27);
-// }
-
-// #CountLabel{
-
-//     display: block;
+    CounterInt = 0;
+    CounterTxT.innerText = 0;
     
-//     color: antiquewhite;
-//     text-align: center;
-//     font-size: 10em;
-//     font-family: Arial, Helvetica, sans-serif;
+}
 
-// }
 
-// #BtnContainer{
+function DecreaseCounter(){
 
-//     text-align: center;
+    CounterInt -= 1;
+    CounterTxT.innerText = CounterInt;
 
-// }
+}
 
-// .Buttons{
+/* body{
+    background-color: black;
 
-//     padding: 10px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 4em;
+    font-weight: bold;
 
-//     font-size: 1.5em;
-//     color: antiquewhite;
+    align-items: center;
+    text-align: center;
+
+
+}
+
+h1{
+
+    font-size: 1em;
+
+}
+
+#CounterTxt{
+
+    margin-top: 2em;
+    margin-bottom: 2px;
+
+}
+
+button{
+
+    margin: 1rem;
+    padding: none;
+
+    border: none;
+    border-radius: 5px;
     
-//     background-color: black;
-//     border-radius: 5px;
+    padding: 15px 25px;
 
-//     cursor: pointer;
-//     transition: background-color 0.25s;
-// }
+    cursor: pointer;
 
-// .Buttons:hover{
+    color: white;
 
-//     background-color: rgb(24, 0, 43);
-// }
+}
+
+
+#IncreaseBtn {
+
+    background-color: rgb(60, 150, 121);
+
+}
+
+#IncreaseBtn:hover{
+
+    background-color: rgb(80, 179, 146);
+
+}
+
+#DecreaseBtn {
+
+    background-color: rgb(223, 48, 4);
+
+}
+
+#DecreaseBtn:hover{
+
+    background-color: rgb(241, 54, 7);
+
+}
+
+#ResetBtn{
+
+    background-color: rgb(3, 89, 201);
+
+}
+
+#ResetBtn:hover{
+
+    background-color: rgb(3, 100, 228);
+
+} */
