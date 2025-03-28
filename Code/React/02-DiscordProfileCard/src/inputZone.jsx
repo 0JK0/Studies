@@ -41,6 +41,7 @@ export function InputZone({ userData, handleInput }) {
 
             <input 
                 type="text" 
+                maxlength="15"
                 className="inputZone-inputBox" 
                 placeholder="Name"
                 name="name"  
@@ -50,6 +51,7 @@ export function InputZone({ userData, handleInput }) {
 
             <input  
                 type="text" 
+                maxlength="15"
                 className="inputZone-inputBox" 
                 placeholder="Username"
                 name="userName"  
@@ -59,6 +61,7 @@ export function InputZone({ userData, handleInput }) {
 
             <input 
                 type="text" 
+                maxlength="10"
                 className="inputZone-inputBox"
                 placeholder="Pronouns"
                 name="pronouns"  
@@ -67,6 +70,7 @@ export function InputZone({ userData, handleInput }) {
             />
 
             <input
+                maxlength="150"
                 type="text"
                 className="inputZone-inputBox"  
                 placeholder="Bio"

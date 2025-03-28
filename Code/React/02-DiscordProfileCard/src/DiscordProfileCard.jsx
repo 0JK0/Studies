@@ -93,7 +93,7 @@ export function DiscordProfileCard({bgColor,profileImage, name,userName,pronouns
 
                     <span className='DiscordProfileCard-userName'>{userName}</span>
                     <span className='DiscordProfileCard-pronouns'> • {pronouns}</span>
-                    <span className='DiscordProfileCard-badges'> X - X </span>
+                    {/* <span className='DiscordProfileCard-badges'> X - X </span> */}
 
                 </div>
 
