@@ -26,32 +26,6 @@ const styles = StyleSheet.create({
 
   },
 
-  RecentNotes: {
-
-    backgroundColor: '#000',
-
-    borderWidth: 3,
-    borderColor: '#fff',
-    borderRadius: 15,
-
-    width: '95%',
-    margin: 10,
-    marginBottom: 5,
-
-    flexGrow: 0,
-    maxHeight: 400,
-
-  },
-
-  RecentNotesContent: {
-
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-
-  },
-
-
 
 
 });

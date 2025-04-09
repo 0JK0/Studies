@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, View,TextInput } from 'react-native';
-
-import { useFonts } from 'expo-font';
-
-import CustomButton from '../components/Button';
-
 
 import { useNavigation } from '@react-navigation/native';
 
-import styles from '../Styles/LoginStyle';
+import styles from '../Styles/SignInStyle';
+import CustomButton from '../components/Button';
+import CustomSwitch from '../components/Checkmark';
 
-export default function LoginScreen() {
+
+export default function SigInScreen() {
 
   // Init UseNavigation
   const navigation = useNavigation();
@@ -29,24 +27,16 @@ export default function LoginScreen() {
     })
   }
 
+  const handleToggle = (value) => {
+    console.log('Switch is now:', value);
+    
+  };
+
   return (
 
     <View style={styles.container}>
-
-        <View style={styles.CustomButton}>
-         <CustomButton 
-         onPress={() => navigation.navigate('SigIn')}
-         buttonText={"SIGN IN"}
-
-         anchura={108}
-         altura={45}
-         fontSize={18}
-
-         /> 
-        </View>
-        
-
-        <Text style={styles.Text} > LOG IN </Text>
+      
+        <Text style={styles.Text} > SIG IN </Text>
 
         <TextInput
 
@@ -75,6 +65,31 @@ export default function LoginScreen() {
           
           
         />
+
+
+        <TextInput 
+
+          style={styles.TextInput} 
+          placeholder='Comfirm Password' 
+          placeholderTextColor='#c6c3c3' 
+          secureTextEntry={true}
+          textContentType="password"
+
+          value={Password}
+          onChangeText={setPassword}
+
+
+        />
+
+        <View style={styles.Toggle}>
+
+          <Text style={styles.ToggleLabel}> Stay Logged In</Text>
+          <CustomSwitch  onToggle={handleToggle} />
+
+          
+          
+        </View>
+        
 
         <CustomButton 
           onPress={handleLogin}  

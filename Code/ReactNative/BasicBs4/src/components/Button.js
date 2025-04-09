@@ -58,8 +58,6 @@ const CustomButton = ({ onPress,buttonText,altura,anchura,fontSize }) => {
 
                     fontFamily: "Mx437",
                     fontSize: fontSize,
-
-
                     color: "#000",
 
                     textAlign: "center",

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-web';
 
 
 const styles = StyleSheet.create({
@@ -26,6 +27,72 @@ const styles = StyleSheet.create({
 
     },
 
+    NoteTitle: {
+
+        width: '90%',
+        maxHeight: 60,
+
+        flex: 1,
+        flexShrink:1,
+
+        borderWidth: 2,
+        borderColor: '#fff',
+        borderRadius: 15,
+        
+        padding: 10,
+        paddingHorizontal: 0,
+        paddingVertical: 10,
+        paddingLeft: 20,
+
+        marginBottom: 15,
+
+        fontSize: 20,
+        fontFamily:'Mx437',
+        lineHeight: 18,
+        color:'#fff'
+
+    },
+
+    NoteBody: {
+        
+        width: '85%',
+        maxHeight: '70%',
+
+        flex: 1,
+        flexShrink:1,
+
+        borderWidth: 2,
+        borderColor: '#fff',
+        borderRadius: 15,
+        
+        
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        paddingLeft: 20,
+
+        marginBottom: 15,
+
+        fontSize: 20,
+        fontFamily:'Mx437',
+        lineHeight: 18,
+        color:'#fff',
+
+        alignContent:'flex-start',
+        justifyContent:'flex-start',
+        textAlignVertical: 'top'
+
+
+    },
+
+    ButtonZone: {
+
+        flexDirection: 'row',
+
+        justifyContent: 'space-between',
+        textAlign: 'center',
+        alignItems: 'center',
+
+    },
 
 
 })
