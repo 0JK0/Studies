@@ -36,7 +36,7 @@ export default function SigInScreen() {
 
     <View style={styles.container}>
       
-        <Text style={styles.Text} > SIG IN </Text>
+        <Text style={styles.Text} > SIGN IN </Text>
 
         <TextInput
 

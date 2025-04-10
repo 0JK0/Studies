@@ -4,7 +4,7 @@ import {useNavigation } from '@react-navigation/native';
 import { useState } from "react"
 import { StyleSheet } from 'react-native';
 
-const UserSettings = () => {
+const GoUserSettings = () => {
 
     const navigation = useNavigation();
 
@@ -20,6 +20,7 @@ const UserSettings = () => {
 
 
 }
+
 
 const styles = StyleSheet.create({
 
@@ -94,4 +95,4 @@ const PfPButton = ({ onPress }) => {
     )
 
 };
-export default UserSettings;
+export default GoUserSettings;

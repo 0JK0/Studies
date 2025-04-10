@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/Login';
 import HomeScreen from '../screens/HomeScreen';
 import NewNoteScreen from '../screens/NewNoteScreen';
-import UserSettings from '../components/UserSettings';
+import GoUserSettings from '../components/PfpButton';
 import SettingsScreen from '../screens/SettingsScreen';
 import SigInScreen from '../screens/SignInScren';
 
@@ -32,7 +32,7 @@ export default function RootStack(){
                 options={{
                     headerShown: true,
                     title:"",
-                    headerRight: () => <UserSettings />
+                    headerRight: () => <GoUserSettings />
                 
                 }} 
             />

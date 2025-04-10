@@ -23,13 +23,59 @@ const styles = StyleSheet.create({
     Text:{
 
         fontSize: 30,
-        margin: 50,
+        marginTop:15,
     
         color:'#fff',
     
         fontFamily:'Mx437',
 
-    }
+    },
+
+    ProfileZone: {
+        flex:1,
+        flexDirection: 'column',
+
+        width: 900,
+
+        alignItems: 'center',
+        textAlign: 'center',
+        justifyContent: 'center',
+
+    },
+
+    UserPFP: {
+
+        width: 150,
+        height:150,
+        
+        borderRadius: 100,
+
+        marginTop: 30,
+        marginBottom: 20,
+
+        backgroundColor: '#fff',
+
+        alignItems: 'center',
+        textAlign: 'center',
+        justifyContent: 'center',
+
+    },
+
+    UserName: {
+
+        fontSize: 35,
+        marginBottom:20,
+    
+        color:'#fff',
+    
+        fontFamily:'Mx437',
+        
+        alignItems: 'center',
+        textAlign: 'center',
+        justifyContent: 'center',
+    },
+
+
 
 })
 

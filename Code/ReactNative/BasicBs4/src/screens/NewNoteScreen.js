@@ -42,7 +42,7 @@ export default function NewNoteScreen({ route }) {
 
             <CustomButton 
 
-                onPress={null} 
+                onPress={() => navigation.navigate('Home')}
                 buttonText={<Icon name={'video'} size={30} color="black" />} 
                 altura={55} 
                 anchura={70} 
@@ -52,7 +52,7 @@ export default function NewNoteScreen({ route }) {
 
             <CustomButton 
 
-                onPress={navigation.navigate('Home')} 
+                onPress={() => navigation.navigate('Home')}
                 buttonText="Guardar" 
                 altura={60} 
                 anchura={150} 
@@ -63,7 +63,7 @@ export default function NewNoteScreen({ route }) {
 
             <CustomButton 
 
-                onPress={null} 
+                onPress={() => navigation.navigate('Home')}
                 buttonText={<Icon name={'mic'} size={30} color="black" />} 
                 altura={55} 
                 anchura={70} 
