@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BasicBs4",
-    "slug": "BasicBs4",
+    "name": "SQLiteTest",
+    "slug": "SQLiteTest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,20 +20,13 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.jayjay0.BasicBs4"
+      "package": "com.jayjay0.SQLiteTest"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
-    "extra": {
-      "eas": {
-        "projectId": "5fa5c98a-d54e-4a16-b00f-a96a3d9bcffe"
-      }
-    },
     "plugins": [
-      
+      "expo-sqlite"
     ]
-
   }
 }

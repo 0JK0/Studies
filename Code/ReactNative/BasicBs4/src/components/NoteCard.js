@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { Text, View,Pressable,Animated,StyleSheet } from 'react-native';
+import { useState } from "react"
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -26,26 +26,61 @@ const StatusIcon = ({type}) => {
 
 }
 
-const NoteCard = ({ Tittle, Date, NoteType }) => {
+  
+const NoteCard = ({ Tittle, Date, NoteType, onPress }) => {
 
     const feather = require('feather-icons');
 
+    const[scale] = useState(new Animated.Value(1));
+    
+    const handlePressIn = () => {
+
+        Animated.spring(scale, {
+
+            toValue: 1.1,
+            useNativeDriver: true,
+
+        }).start();
+
+    };
+
+    const handlePressOut = () => {
+
+        Animated.spring(scale, {
+
+        toValue: 1,
+        useNativeDriver: true,
+
+        }).start();
+    };
+
+
     return(
 
-        <View style={styles.Card}>
-
-            <View>
-              
-                <Text style={styles.Tittle}>{Tittle}</Text>
-                <Text style={styles.Date}>{Date}</Text>
+        <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut} onPress={onPress}> 
+            <Animated.View style={[
                 
-            </View>
+                styles.Card, {
+
+                    transform: [{scale}]
+                
+                }
+                
+                ]}>
+
+                <View>
+                
+                    <Text style={styles.Tittle}>{Tittle}</Text>
+                    <Text style={styles.Date}>{Date}</Text>
+                    
+                </View>
 
 
 
-            <StatusIcon type={NoteType}/>
+                <StatusIcon type={NoteType}/>
 
-        </View>
+            </Animated.View >
+        </Pressable>
 
     )
 

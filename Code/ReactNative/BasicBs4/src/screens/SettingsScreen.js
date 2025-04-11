@@ -18,7 +18,7 @@ function SettingsScreen({ }) {
       <View style={styles.ProfileZone}>
 
         <Image style={styles.UserPFP} source={require('../../assets/icon.png')}/> 
-        <Text style={styles.UserName}>123456789_12345678</Text>
+        <Text style={styles.UserName}>JayJason_Kingly22</Text>
 
       </View>
       

@@ -9,7 +9,6 @@ import GoUserSettings from '../components/PfpButton';
 import SettingsScreen from '../screens/SettingsScreen';
 import SigInScreen from '../screens/SignInScren';
 
-
 const Stack = createNativeStackNavigator();
 
 export default function RootStack(){
@@ -54,8 +53,6 @@ export default function RootStack(){
                 component={SigInScreen} 
                 options={{headerShown: false}} 
             />
-
-
 
         </Stack.Navigator>
 

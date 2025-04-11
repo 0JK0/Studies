@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View,TextInput } from 'react-native';
 
-import { useFonts } from 'expo-font';
-
 import CustomButton from '../components/Button';
-
 
 import { useNavigation } from '@react-navigation/native';
 
 import styles from '../Styles/LoginStyle';
+import {initDB} from '../DataBase/db'
 
 export default function LoginScreen() {
+
+  //Init DataBase
+  useEffect(() => {
+    initDB()
+      .then(() => {
+        console.log('DB Ready in LoginScreen');
+      })
+      .catch((err) => {
+        console.error('DB Init Error:', err);
+      });
+  }, []);
 
   // Init UseNavigation
   const navigation = useNavigation();
@@ -28,6 +37,16 @@ export default function LoginScreen() {
 
     })
   }
+
+  useEffect(() => {
+    initDB()
+      .then(() => {
+        console.log('DB Ready in LoginScreen');
+      })
+      .catch((err) => {
+        console.error('DB Init Error:', err);
+      });
+  }, []);
 
   return (
 
