@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DailyVlog",
-    "slug": "DailyVlog",
+    "name": "JayNotes",
+    "slug": "JayNotes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,11 +19,10 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "bundle",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
@@ -33,9 +32,7 @@
           "backgroundColor": "#ffffff"
         }
       ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    ]
+
   }
 }

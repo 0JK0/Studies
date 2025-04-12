@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { Text, View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View, ActivityIndicator } from 'react-native';
-import { useFonts } from 'react-native-fonts';
 
-import LoginScreen from './src/screens/Login';
-import RootStack from './src/navigation/StackNavigator';
+import {useFonts} from 'expo-font'
 
-export default function App() {
+import RootStack from './src/navigation/StackNavigator'
+
+export default function Index() {
+
   const [fontsLoaded] = useFonts({
     'Mx437': require('./assets/fonts/Mx437_IBM_VGA_8x16.ttf'),
   });
@@ -21,8 +20,10 @@ export default function App() {
   }
 
   return (
+
     <NavigationContainer>
       <RootStack />
     </NavigationContainer>
+
   );
 }

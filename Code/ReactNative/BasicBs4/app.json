@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jayjay0.BasicBs4"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,15 +26,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "extra": {
       "eas": {
         "projectId": "5fa5c98a-d54e-4a16-b00f-a96a3d9bcffe"
       }
     },
-    "plugins": [
-      
-    ]
-
+    "plugins": []
   }
 }

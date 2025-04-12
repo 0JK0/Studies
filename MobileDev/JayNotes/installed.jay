@@ -1,0 +1,9 @@
+@react-navigation/native
+react-native-fonts (unused)
+react-native-asset (unused?)
+expo-fonts
+react-native-calendars
+feather-icons
+
+unistalled:
+expo-route
