@@ -25,7 +25,7 @@ export default function LoginScreen() {
       password: Password,
 
     })
-  }
+  };
 
   return (
 

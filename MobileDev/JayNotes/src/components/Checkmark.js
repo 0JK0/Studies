@@ -23,7 +23,7 @@ const CustomSwitch = ({ onToggle }) => {
       onPress={toggleSwitch}
       style={[
         styles.switchBackground,
-        { backgroundColor: isOn ? '#8cdf' : '#dcdde1' },
+        { backgroundColor: isOn ? '#2f3640' : '#fff',  },
       ]}
     >
       <Animated.View
@@ -31,8 +31,7 @@ const CustomSwitch = ({ onToggle }) => {
           styles.thumb,
           {
             transform: [{ translateX }],
-            backgroundColor: isOn ? '#ffffff' : '#2f3640',
-          },
+            backgroundColor: isOn ? '#ffffff' : '#2f3640', },
         ]}
       />
     </TouchableOpacity>

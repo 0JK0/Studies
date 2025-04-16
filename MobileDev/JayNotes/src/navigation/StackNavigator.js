@@ -7,6 +7,7 @@ import NewNoteScreen from '../screens/NewNoteScreen';
 import GoUserSettings from '../components/PfpButton';
 import SettingsScreen from '../screens/SettingsScreen';
 import SigInScreen from '../screens/SignInScren';
+import SigInScreen2 from '../screens/SignInScren2';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,12 @@ export default function RootStack(){
             <Stack.Screen 
                 name="SigIn" 
                 component={SigInScreen} 
+                options={{headerShown: false}} 
+            />
+
+            <Stack.Screen 
+                name="SignIn2" 
+                component={SigInScreen2} 
                 options={{headerShown: false}} 
             />
 

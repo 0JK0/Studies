@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   Text: {
 
     fontSize: 50,
-    marginBottom: 15,
+    marginBottom: 0,
 
     color:'#fff',
 
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingLeft: 20,
 
-    marginBottom: 25,
+    marginTop: 25,
 
     fontSize: 20,
     fontFamily:'Mx437',
@@ -61,6 +61,18 @@ const styles = StyleSheet.create({
     color:'#fff',
 
     fontFamily:'Mx437',
+
+
+  },
+
+  CustomButton: {
+
+    position: 'absolute',
+    top: 25,
+    right: 10,
+
+    margin:0,
+    padding:0,
 
 
   },
@@ -87,7 +99,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
 
-    marginTop: 10,
+    marginTop: 50,
     marginBottom: 15,
 
 
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
   ToggleLabel: {
 
 
-    fontSize: 20,
+    fontSize: 25,
     margin: 5,
     marginRight: 15,
 
@@ -106,6 +118,8 @@ const styles = StyleSheet.create({
     fontFamily:'Mx437',
 
   }
+
+
 
 
 

@@ -1,9 +1,22 @@
-@react-navigation/native
-react-native-fonts (unused)
-react-native-asset (unused?)
-expo-fonts
-react-native-calendars
-feather-icons
+Installed:
+  @react-navigation/native
+  react-native-fonts (unused)
+  react-native-asset (unused?)
+  expo-fonts
+  react-native-calendars
+  feather-icons
+  expo-sqlite (npx)
+  expo-image-picker (npx expo)
+  expo-file-system
+  expo-crypto
+
 
 unistalled:
-expo-route
+  expo-route
+  react-native-image-picker
+
+ToInstall:
+expo-av (Record Audio)
+expo-camara
+expo-file-system (Store media)
+expo-asset

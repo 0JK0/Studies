@@ -2,35 +2,70 @@ import React, { useState } from 'react';
 import { Text, View,TextInput } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import { useSQLiteContext } from "expo-sqlite";
+import { checkExists } from '../Database/db';
 
 import styles from '../Styles/SignInStyle';
 import CustomButton from '../components/Button';
-import CustomSwitch from '../components/Checkmark';
+
+
 
 
 export default function SigInScreen() {
 
-  // Init UseNavigation
+
   const navigation = useNavigation();
+  const DB = useSQLiteContext();
 
-  // Getting Username AND Password Text
-  const [Username, setUsername] = useState('')
+
+  const [Name, setName] = useState('')
   const [Password, setPassword] = useState('')
+  const [ConfirmPassword, setConfirmPassword] = useState('')
 
-  const handleLogin = () => {
+  const HandleSingIn = async (name, password, confirmPassword) => {
 
-    navigation.navigate('Home', {
-      // Navigate to the Screen 'Home', Params to navigate with
-      username: Username,
-      password: Password,
+    console.log(name, password, confirmPassword);
+    const exists = await checkExists(name,DB);
 
-    })
-  }
+    if (password !== confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    } else if(!name){
 
-  const handleToggle = (value) => {
-    console.log('Switch is now:', value);
+      alert("Please Enter An Name")
+      return;
+    } else if (!name && !password){
+      
+      alert("Please Input All The Information");
+      return;
+
+    } else if(!password){
+
+      alert("Please Enter A Password");
+      return;
+
+    } else if(exists){
+
+      console.warn('NAME ALREADY EXIST IN THE DB: ABORTING INSERT');
+      alert("Username Already In Usage")
+      return;
+      
+    } else {
+
+      console.log(`Name: ${name} - Password: ${password} - ConfirmPassword: ${confirmPassword}`);
+
+      navigation.navigate('SignIn2', {
+  
+        name: Name,
+        password: Password,
+  
+      })
+      return;
+    }
     
   };
+
+
 
   return (
 
@@ -41,14 +76,14 @@ export default function SigInScreen() {
         <TextInput
 
           style={styles.TextInput} 
-          placeholder='Username' 
+          placeholder='Name' 
           placeholderTextColor='#c6c3c3' 
           
-          // Asing the Value of the TextInput to Username 
-          value={Username}
+          // Asing the Value of the TextInput to Name 
+          value={Name}
           
           // When it cahnges activate the UseState Switch so the value is passed to the Var
-          onChangeText={setUsername}
+          onChangeText={setName}
           
         /> 
 
@@ -70,33 +105,25 @@ export default function SigInScreen() {
         <TextInput 
 
           style={styles.TextInput} 
-          placeholder='Comfirm Password' 
+          placeholder='Confirm Password' 
           placeholderTextColor='#c6c3c3' 
           secureTextEntry={true}
           textContentType="password"
 
-          value={Password}
-          onChangeText={setPassword}
+          value={ConfirmPassword}
+          onChangeText={setConfirmPassword}
 
 
         />
-
-        <View style={styles.Toggle}>
-
-          <Text style={styles.ToggleLabel}> Stay Logged In</Text>
-          <CustomSwitch  onToggle={handleToggle} />
-
-          
-          
-        </View>
         
 
         <CustomButton 
-          onPress={handleLogin}  
-          buttonText="SUBMIT"
 
-          anchura={110}
-          altura={50}
+          onPress={() => HandleSingIn(Name,Password,ConfirmPassword)}
+          buttonText="CONTINUE"
+
+          anchura={120}
+          altura={55}
           fontSize={19}
           
         />
