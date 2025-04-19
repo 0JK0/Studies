@@ -1,7 +1,10 @@
 import {Pressable,View,Text,Animated } from 'react-native';
 import {useNavigation } from '@react-navigation/native';
-import { useState } from "react"
-import { StyleSheet } from 'react-native';
+import { useState,useEffect } from "react"
+import { StyleSheet,Image } from 'react-native';
+
+import { getCurrentUser,getProfilePicture } from '../Database/db';
+import { useSQLiteContext } from "expo-sqlite";
 
 const GoUserSettings = () => {
 
@@ -20,20 +23,30 @@ const GoUserSettings = () => {
 
 }
 
-
-const styles = StyleSheet.create({
-
-    Container:{
-
-        alignItems: 'flex-start',
-
-    }
-
-})
-
-
-
 const PfPButton = ({ onPress }) => {
+
+    const DB = useSQLiteContext();
+    
+    const [user, setUser] = useState(null);
+    const [picture, setPicture] = useState(null);
+
+    
+    useEffect(() => {
+    
+        const loadData = async () => {
+    
+          const userName = await getCurrentUser();
+          setUser(userName);
+      
+          const userPic = await getProfilePicture(userName, DB);
+          setPicture(userPic);
+    
+        };
+      
+        loadData();
+    }, []);
+
+    console.log("PCItuRE: ",picture)
 
     const[scale] = useState(new Animated.Value(1));
 
@@ -65,33 +78,60 @@ const PfPButton = ({ onPress }) => {
 
         <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut} onPress={onPress}>
 
-        <Animated.View
+            <Animated.View
 
-            style={{
+                style={{
 
-                transform: [{ scale }],
+                    transform: [{ scale }],
 
-                backgroundColor: "#000",
+                    backgroundColor: "#000",
 
-                borderColor: "#fff",
-                borderWidth: 2,
-                borderRadius: 50,
+                    borderColor: "#000",
+                    borderWidth: 2,
+                    borderRadius: 50,
 
-                margin: 0,
-                padding: 0,
+                    margin: 0,
+                    padding: 0,
 
-                height: 55,
-                width: 55,
+                    height: 55,
+                    width: 55,
+
+                    alignItems: 'center',  
+                    justifyContent: 'center', 
 
 
-            }}
-        >
+                }}
 
-        </Animated.View>
+                
+            >
+                <Image style={styles.Image} source={{ uri: picture}}/> 
+            </Animated.View>
         </Pressable>
 
 
     )
 
 };
+
+const styles = StyleSheet.create({
+
+    Container:{
+
+        alignItems: 'flex-start',
+
+    },
+
+    Image: {
+        width: 50, 
+        height: 50, 
+        borderRadius: 50,
+        margin:0, 
+        padding:0, 
+        alignItems:'center',
+        justifyContent:`center`,
+        alignSelf: 'center',
+    }
+
+})
+
 export default GoUserSettings;

@@ -3,6 +3,7 @@ import { Text, View,TextInput,Image } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
+
 import styles from '../Styles/SignIn2Style';
 import CustomButton from '../components/Button';
 import CustomSwitch from '../components/Checkmark';
@@ -10,7 +11,8 @@ import PfpUpload from '../components/ImageInsert';
 
 import { useSQLiteContext } from "expo-sqlite";
 import { registerUser } from '../Database/db';
-
+import * as FileSystem from 'expo-file-system';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SigInScreen2({route,}) {
   const DB = useSQLiteContext();
@@ -52,10 +54,49 @@ export default function SigInScreen2({route,}) {
 
   };
 
-  const handleImageSelected = (imageBase64) => {
+  const storeImage = async (imageUri,userName) => {
 
-    setImage(imageBase64);
-    console.log("Profile picture selected:", imageBase64);
+    try{
+
+      const userDir = `${FileSystem.documentDirectory}users/${userName}/`;
+
+      const dirInfo = await FileSystem.getInfoAsync(userDir);
+      if (!dirInfo.exists) {
+        await FileSystem.makeDirectoryAsync(userDir, { intermediates: true });
+      }
+
+      const filename = `${userName}_profile.jpg`;
+      const newPath = userDir + filename;
+    
+      await FileSystem.copyAsync({
+        from: imageUri,
+        to: newPath,
+      });
+    
+      await AsyncStorage.setItem('profileImagePath', newPath); 
+      return newPath;
+
+    } catch (error){
+
+      console.error(error)
+
+    }
+
+  };
+
+  const handleImageSelected = async(imageUri) => {
+    try{
+
+      const imagePath = await storeImage(imageUri,name)
+      setImage(imagePath);
+
+      console.log("Profile picture Saved at:", imagePath);
+
+    } catch(error) {
+
+      console.error("Image Storing Failed:",error)
+    }
+
   };
 
   return (

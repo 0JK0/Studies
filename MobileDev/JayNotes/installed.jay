@@ -9,7 +9,8 @@ Installed:
   expo-image-picker (npx expo)
   expo-file-system
   expo-crypto
-
+  react-native-async-storage
+  expo-secure-store
 
 unistalled:
   expo-route

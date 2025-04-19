@@ -1,4 +1,15 @@
 import { useSQLiteContext } from "expo-sqlite";
+import * as SecureStore from 'expo-secure-store';
+import * as Crypto from 'expo-crypto';
+
+
+
+export const loadData = async (db:any) => {
+
+    const result = await db.getAllAsync(`SELECT * FROM users;`);
+    console.log("Fectched Users: ",result)
+
+}
 
 export async function checkExists(name:string,db:any): Promise<boolean> {
 
@@ -21,13 +32,24 @@ export async function checkExists(name:string,db:any): Promise<boolean> {
     
 }
 
+async function hashPassword(password: string): Promise<string> {
+
+    return await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      password
+    );
+}
+
 export async function registerUser(name:string,password:string,image:string,db:any) {
 
-    console.log(`registerUser, Recived: ${name} - ${password}` )
+    console.log("REISTER USER CALLED")
+    console.log(`registerUser, Recived: ${name} - ${password} - ${image}` )
 
     try{
 
-        await db.runAsync(`INSERT INTO users (name,password,image) VALUES (?,?,?)`,[name,password,image]);
+        const hashedPassword = await hashPassword(password);
+
+        await db.runAsync(`INSERT INTO users (name,password,image) VALUES (?,?,?)`,[name,hashedPassword,image]);
         console.log("registerUser Ran successfully");
         alert("User Registered Sucessfully")
 
@@ -43,3 +65,84 @@ export async function registerUser(name:string,password:string,image:string,db:a
     }
     
 }
+
+
+export async function validateCredentials(name:string,password:string,db:any): Promise<boolean> {
+    
+
+    const hashed = await hashPassword(password);
+    
+    try{
+        const result = await db.getAllAsync(
+            `SELECT * FROM users WHERE name = ? AND password = ?`, [name, hashed]
+        );
+        return result.length > 0;
+
+    } catch(error) {
+
+        console.error(error)
+        return false;
+
+    }
+}
+
+export const getProfilePicture = async (name:string, db:any) => {
+
+    try{
+
+        const imagePath = await db.getAllAsync(`SELECT image FROM users WHERE name = ?`,[name]);
+        console.log("Image Path: ",imagePath)
+        return imagePath?.[0]?.image || null;
+        
+
+    }catch(error){
+
+        console.error("getProfilePicture: ", error)
+        return "pfp not found / Error";
+
+    }
+
+}
+
+
+
+
+export const saveUserSession = async (userName: string) => {
+
+    try {
+
+      await SecureStore.setItemAsync('loggedInUser', userName);
+      console.log('User session saved',userName);
+
+    } catch (error) {
+
+      console.error('saveUserSession error: ', error);
+    }
+
+};
+
+export const getCurrentUser = async () => {
+
+    try {
+
+      const userName = await SecureStore.getItemAsync('loggedInUser');
+      return userName;
+
+    } catch (error) {
+
+      console.error('Error getCurrentUser: ', error);
+      return null;
+
+    }
+};
+  
+
+export const logOut = async () => {
+    try {
+      await SecureStore.deleteItemAsync('loggedInUser');
+      console.log('User logged out');
+    } catch (error) {
+      console.error('Error logging out', error);
+    }
+};
+

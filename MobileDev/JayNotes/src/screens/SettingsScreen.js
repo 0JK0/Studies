@@ -1,24 +1,50 @@
 import { Text, ScrollView,View, Image } from 'react-native';
+import { useState,useEffect } from 'react';
 
 import {useNavigation } from '@react-navigation/native';
+import { useSQLiteContext } from "expo-sqlite";
 
 import styles from '../Styles/SettingsStyle';
 import SettingsButton from '../components/SettingsButton'
 
+import { getCurrentUser,getProfilePicture } from '../Database/db';
+
 
 
 function SettingsScreen({ }) {
+  const DB = useSQLiteContext();
+
+  const [user, setUser] = useState(null);
+  const [picture, setPicture] = useState(null);
 
   const navigation = useNavigation();
 
+  useEffect(() => {
+
+    const loadData = async () => {
+
+      const userName = await getCurrentUser();
+      setUser(userName);
+  
+      const userPic = await getProfilePicture(userName, DB);
+      setPicture(userPic);
+
+    };
+  
+    loadData();
+  }, []);
+
+  console.log(`Current User: ${user} -- UserPicture?: ${picture}`)
+
   return(
+    
 
     <ScrollView style={styles.Container} contentContainerStyle={styles.ContentContainer}>
 
       <View style={styles.ProfileZone}>
 
-        <Image style={styles.UserPFP} source={require('../../assets/images/icon.png')}/> 
-        <Text style={styles.UserName}>JayJason_Kingly22</Text>
+        <Image style={styles.UserPFP} source={{ uri: picture || "../../assets/images/icon.png" }}/> 
+        <Text style={styles.UserName}>{user || "Loading..."}</Text>
 
       </View>
       

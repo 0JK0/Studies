@@ -11,13 +11,33 @@ import {SQLiteProvider,SQLiteDatabase} from 'expo-sqlite'
 export default function Index() {
 
   const createdDbIfNeeded = async(db:SQLiteDatabase) =>{
+    try{
+      console.log('CREATING USERS DB IF NEEDED');
 
-    console.log('CREATING DB IF NEEDED');
+      await db.execAsync(
+  
+          `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, password TEXT, image TEXT);`
+      );
 
-    await db.execAsync(
+    } catch(error){
 
-        `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, image TEXT);`
-    );
+      console.error("ERROR CREATIG USERS DB: ",error)
+
+    }
+
+    
+    try{
+      console.log('CREATING NOTES DB IF NEEDED');
+      await db.execAsync(
+  
+        `CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT,date DATE, title TEXT , body TEXT, noteType TEXT);`
+      );
+    } catch (error){
+
+      console.error("ERROR CREATIG NOTES DB: ",error)
+
+    }
+
   }
 
 

@@ -1,8 +1,12 @@
 import { View,Text,StyleSheet,Image } from "react-native"
 import { useState } from "react"
 
+import * as FileSystem from 'expo-file-system'
 import * as ImagePicker from 'expo-image-picker';
+
+
 import CustomButton from "./Button";
+
 
 const PfpUpload = ({username,onImageSelected}) => {
 
@@ -15,15 +19,14 @@ const PfpUpload = ({username,onImageSelected}) => {
             allowsEditing: true,
             aspect: [12, 12],
             quality: 1,
-            base64:true,
         });
 
         if (!result.canceled) {
-            const {uri, base64} = result.assets[0];
+            const {uri} = result.assets[0];
 
 
             setImage(uri);
-            onImageSelected(base64);
+            onImageSelected(uri);
         }
     };
   

@@ -4,27 +4,48 @@ import { Text, View,TextInput } from 'react-native';
 import CustomButton from '../components/Button';
 
 import { useNavigation } from '@react-navigation/native';
+import { useSQLiteContext } from "expo-sqlite";
 
 import styles from '../Styles/LoginStyle';
+import { validateCredentials,saveUserSession } from '../Database/db';
 
 
 export default function LoginScreen() {
 
+  const DB = useSQLiteContext();
+
   // Init UseNavigation
   const navigation = useNavigation();
 
-  // Getting Username AND Password Text
-  const [Username, setUsername] = useState('')
+  // Getting Name AND Password Text
+  const [Name, setName] = useState('')
   const [Password, setPassword] = useState('')
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
+     
+    try{
+      const valid =  await validateCredentials(Name,Password,DB);
+      console.log("ANSWER FROM validateCredentials: ", valid)
 
-    navigation.navigate('Home', {
-      // Navigate to the Screen 'Home', Params to navigate with
-      username: Username,
-      password: Password,
+      if(valid){
 
-    })
+        await saveUserSession(Name);
+        navigation.navigate('Home', {name: Name,})
+
+      } else {
+
+        alert("User Not Found");
+
+      }
+      
+      
+
+    } catch(error) {
+
+      console.error(error)
+
+    }
+    
   };
 
   return (
@@ -49,14 +70,14 @@ export default function LoginScreen() {
         <TextInput
 
           style={styles.TextInput} 
-          placeholder='Username' 
+          placeholder='Name' 
           placeholderTextColor='#c6c3c3' 
           
-          // Asing the Value of the TextInput to Username 
-          value={Username}
+          // Asing the Value of the TextInput to Name 
+          value={Name}
           
           // When it cahnges activate the UseState Switch so the value is passed to the Var
-          onChangeText={setUsername}
+          onChangeText={setName}
           
         /> 
 
