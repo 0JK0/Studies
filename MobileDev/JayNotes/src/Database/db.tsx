@@ -104,19 +104,50 @@ export const getProfilePicture = async (name:string, db:any) => {
 
 }
 
+export const getUserId = async (name:string,db:any): Promise<number | null> => {
+
+    console.log("=====GET USER ID=========")
+    try {
+        
+        const result = await db.getAllAsync(
+            `SELECT id FROM users WHERE name = ?`, [name]
+        );
+
+        console.log(result);
+        
+        if (result.length > 0) {
+
+            return result[0].id; 
+
+        } else {
+
+            console.log('User not found');
+            return null;
+        }
+    } catch (error) {
+
+        console.error("Error fetching user ID: ", error);
+        return null;
+
+    }
+}
 
 
 
-export const saveUserSession = async (userName: string) => {
+export const saveUserSession = async (userName: string, userId:number) => {
 
     try {
+        
+        console.log(`saveUserSession recived: `, userName, " and ", userId)
 
-      await SecureStore.setItemAsync('loggedInUser', userName);
-      console.log('User session saved',userName);
+        const session = JSON.stringify({ userName, userId });
+
+        await SecureStore.setItemAsync('userSession', session);
+        console.log('User session saved: ', session);
 
     } catch (error) {
 
-      console.error('saveUserSession error: ', error);
+        console.error('saveUserSession error: ', error);
     }
 
 };
@@ -125,24 +156,26 @@ export const getCurrentUser = async () => {
 
     try {
 
-      const userName = await SecureStore.getItemAsync('loggedInUser');
-      return userName;
+        const sessionString = await SecureStore.getItemAsync('userSession');
+        if (!sessionString) return null;
+
+        console.log("getCurrentUser Logs: ",sessionString);
+        return JSON.parse(sessionString); // returns { userName, userId }
 
     } catch (error) {
 
-      console.error('Error getCurrentUser: ', error);
-      return null;
+        console.error('Error getUserSession: ', error);
+        return null;
+    }
+}
+  
 
+export const clearUserSession = async () => {
+    try {
+      await SecureStore.deleteItemAsync('userSession');
+      console.log('User session cleared');
+    } catch (error) {
+      console.error('clearUserSession error: ', error);
     }
 };
   
-
-export const logOut = async () => {
-    try {
-      await SecureStore.deleteItemAsync('loggedInUser');
-      console.log('User logged out');
-    } catch (error) {
-      console.error('Error logging out', error);
-    }
-};
-

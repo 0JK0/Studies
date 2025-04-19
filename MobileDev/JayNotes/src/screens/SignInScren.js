@@ -79,10 +79,9 @@ export default function SigInScreen() {
           placeholder='Name' 
           placeholderTextColor='#c6c3c3' 
           
-          // Asing the Value of the TextInput to Name 
+
           value={Name}
           
-          // When it cahnges activate the UseState Switch so the value is passed to the Var
           onChangeText={setName}
           
         /> 

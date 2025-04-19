@@ -11,6 +11,7 @@ import {SQLiteProvider,SQLiteDatabase} from 'expo-sqlite'
 export default function Index() {
 
   const createdDbIfNeeded = async(db:SQLiteDatabase) =>{
+    await db.execAsync('PRAGMA foreign_keys = ON;');
     try{
       console.log('CREATING USERS DB IF NEEDED');
 
@@ -30,7 +31,14 @@ export default function Index() {
       console.log('CREATING NOTES DB IF NEEDED');
       await db.execAsync(
   
-        `CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT,date DATE, title TEXT , body TEXT, noteType TEXT);`
+        `CREATE TABLE IF NOT EXISTS notes (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date DATE, 
+          title TEXT ,
+          body TEXT, 
+          noteType TEXT, 
+          userId INTEGER,
+          FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE);`
       );
     } catch (error){
 

@@ -35,18 +35,17 @@ const PfPButton = ({ onPress }) => {
     
         const loadData = async () => {
     
-          const userName = await getCurrentUser();
-          setUser(userName);
+          const session = await getCurrentUser();
+          setUser(session.userName);
       
-          const userPic = await getProfilePicture(userName, DB);
+          const userPic = await getProfilePicture(session.userName, DB);
           setPicture(userPic);
+
     
         };
       
         loadData();
     }, []);
-
-    console.log("PCItuRE: ",picture)
 
     const[scale] = useState(new Animated.Value(1));
 

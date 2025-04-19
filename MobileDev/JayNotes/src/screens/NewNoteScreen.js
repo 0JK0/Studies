@@ -1,17 +1,85 @@
 import { Text, View,TextInput } from 'react-native';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 import {useNavigation } from '@react-navigation/native';
+import { useSQLiteContext } from "expo-sqlite";
 import Icon from 'react-native-vector-icons/Feather';
 
 import styles from '../Styles/NewNoteStyle';
 import CustomButton from '../components/Button'
 
+import { saveNewNote } from '../Database/notesDb';
+import { getCurrentUser, } from '../Database/db';
+
+function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+}
+  
 
 export default function NewNoteScreen({ route }) {
 
+    const DB = useSQLiteContext();
     const navigation = useNavigation();
 
+    const [title,setTitle] = useState ('');
+    const [body,setBody] = useState ('');
+    const [date,setDate] = useState('')
+    const [noteType,setNoteType] = useState ('');
+
+    const [user, setUser] = useState('');
+    const [userId,setUserId] = useState();
+        
+
+    useEffect(() => {
+        setDate(getCurrentDate());
+    }, []);
+
+    const handleSave = async () => {
+        try{
+            console.log("++ Getting session...");
+            const session = await getCurrentUser();
+            console.log(" Session result: ", session);
+    
+            if (!session) {
+    
+                console.log("No user session found.");
+                return;
+    
+            } 
+    
+            const { userName, userId } = session;
+            console.log("> Session unpacked", userName, userId);
+    
+            console.log(`==== DATE: ${date} == currentUser: ${userName} ==== UserID: ${userId} =====`);
+    
+            //TEMPORAL
+            const NoteType = "video";
+            console.log("> Preparing to save...");
+
+            try{
+
+                await saveNewNote(date,title,body,NoteType,userId,DB);
+    
+            }catch(error){console.error("Handle Save --> saveNewNote Error: ",error)}
+    
+            console.log("> Navigating to Home...");
+            navigation.navigate('Home')
+
+        } catch(error){
+
+            console.error("first part of handleSave: ",error)
+
+        }
+
+
+    }
+    
+   
 
     return(
 
@@ -23,6 +91,9 @@ export default function NewNoteScreen({ route }) {
                 placeholder='Titulo..' 
                 placeholderTextColor='#c6c3c3' 
 
+                value={title}
+          
+                onChangeText={setTitle}
                                 
             />
 
@@ -34,7 +105,9 @@ export default function NewNoteScreen({ route }) {
                 placeholder='' 
                 placeholderTextColor='#c6c3c3' 
 
-
+                value={body}
+          
+                onChangeText={setBody}
             
             />
 
@@ -52,7 +125,7 @@ export default function NewNoteScreen({ route }) {
 
             <CustomButton 
 
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => handleSave()}
                 buttonText="Guardar" 
                 altura={60} 
                 anchura={150} 

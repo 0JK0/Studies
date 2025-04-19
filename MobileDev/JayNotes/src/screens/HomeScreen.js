@@ -1,8 +1,6 @@
 import { Text, View, ScrollView } from 'react-native';
 
 import {useNavigation } from '@react-navigation/native';
-import { useState,useEffect,getParam } from 'react';
-
 
 import styles from '../Styles/HomeStyle';
 

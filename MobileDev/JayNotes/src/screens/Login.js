@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSQLiteContext } from "expo-sqlite";
 
 import styles from '../Styles/LoginStyle';
-import { validateCredentials,saveUserSession } from '../Database/db';
+import { validateCredentials,saveUserSession,getUserId } from '../Database/db';
 
 
 export default function LoginScreen() {
@@ -29,7 +29,14 @@ export default function LoginScreen() {
 
       if(valid){
 
-        await saveUserSession(Name);
+        const userId = await getUserId(Name, DB);
+
+        if (userId === null) {
+          console.log("User ID could not be retrieved.");
+          return;
+        }
+
+        await saveUserSession(Name,userId);
         navigation.navigate('Home', {name: Name,})
 
       } else {
